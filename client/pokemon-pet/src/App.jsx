@@ -1,9 +1,8 @@
-import { useState } from 'react'
+
 import reactLogo from '/Poké_Ball_icon.svg.png'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
@@ -14,7 +13,7 @@ function App() {
         </a>
       </div>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button >
           Let's start
         </button>
       </div>
