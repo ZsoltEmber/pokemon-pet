@@ -14,7 +14,7 @@ const app = express()
 app.use(express.json())
 
 
-mongoose.connect()
+mongoose.connect(MONGO_URL)
 .then(()=>{
     app.listen(3000, () => {
         console.log('Im in! Open this link: http://127.0.0.1:3000');
