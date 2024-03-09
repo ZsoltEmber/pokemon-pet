@@ -1,10 +1,12 @@
+import ChooseStarter from "./ChooseStarter";
+
 function Playground(){
     
 
 
     return(
         <div>
-            ASD
+            <ChooseStarter/>
         </div>
     );
 }
