@@ -1,8 +1,10 @@
 
 import reactLogo from '/Poké_Ball_icon.svg.png'
+import { useNavigate } from "react-router-dom";
 import './App.css'
 
 function App() {
+  const navigate = useNavigate();
 
   return (
     <>
@@ -13,7 +15,7 @@ function App() {
         </a>
       </div>
       <div className="card">
-        <button >
+        <button onClick={()=> navigate("/playground")}>
           Let's start
         </button>
       </div>
