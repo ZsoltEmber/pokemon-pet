@@ -49,8 +49,13 @@
 
 .starter-container{
   margin: 30px;
+  box-sizing: border-box;
 }
 
 .starters-container{
   display: flex;
+}
+
+.title{
+  margin-bottom: 100px;
 }

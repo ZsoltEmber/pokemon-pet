@@ -30,6 +30,7 @@ function ChooseStarter() {
 
     return (
         <div>
+            <h1 className={"title"}>CHOOSE YOUR STARTER</h1>
             {
            (bulbasaur && charmander && squirtle) ?
            <div className={"starters-container"}>
