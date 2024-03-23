@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Starter from "./Starter.jsx";
 
 function ChooseStarter() {
     const [bulbasaur, setBulbasaur] = useState();
@@ -29,14 +30,17 @@ function ChooseStarter() {
 
     return (
         <div>
+            <h1 className={"title"}>CHOOSE YOUR STARTER</h1>
             {
            (bulbasaur && charmander && squirtle) ?
-           <div>
-            <div>{bulbasaur.name}</div>
-            <div>{charmander.name}</div>
-            <div>{squirtle.name}</div>
+           <div className={"starters-container"}>
+            <Starter pokemon={bulbasaur}/>
+            <Starter pokemon={charmander}/>
+            <Starter pokemon={squirtle}/>
             </div>
-            : <div></div>
+            : <div>
+
+               </div>
         }
 
         </div>
