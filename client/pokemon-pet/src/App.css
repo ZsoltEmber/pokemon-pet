@@ -36,3 +36,21 @@
 .read-the-docs {
   color: #888;
 }
+
+.starter-img{
+  image-rendering: pixelated;
+  height: 100px;
+  width: 100px;
+}
+
+.starter-img:hover{
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.starter-container{
+  margin: 30px;
+}
+
+.starters-container{
+  display: flex;
+}
