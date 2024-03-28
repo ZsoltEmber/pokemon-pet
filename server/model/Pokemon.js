@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+const mongoose = require("mongoose");
 const {Schema, model} = mongoose;
 
 const pokemonSchema = new Schema({
@@ -14,4 +14,4 @@ const pokemonSchema = new Schema({
 
 })
 
-export default model("Pokemon", pokemonSchema)
+module.exports = model("Pokemon", pokemonSchema)
