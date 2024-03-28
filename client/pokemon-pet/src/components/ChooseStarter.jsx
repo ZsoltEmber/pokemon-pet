@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Starter from "./Starter.jsx";
+import Loading from "./Loading.jsx";
 
 function ChooseStarter() {
     const [bulbasaur, setBulbasaur] = useState();
@@ -38,9 +39,7 @@ function ChooseStarter() {
             <Starter pokemon={charmander}/>
             <Starter pokemon={squirtle}/>
             </div>
-            : <div>
-
-               </div>
+            : <Loading/>
         }
 
         </div>

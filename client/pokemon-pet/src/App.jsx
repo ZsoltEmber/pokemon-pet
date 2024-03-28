@@ -1,5 +1,5 @@
 
-import reactLogo from '/Poké_Ball_icon.svg.png'
+import pokeBallLogo from '/Poké_Ball_icon.svg.png'
 import { useNavigate } from "react-router-dom";
 import './App.css'
 
@@ -10,9 +10,7 @@ function App() {
     <>
       <div>
       <h1>Poké Ranch</h1>
-        <a href="" target="_blank">
-          <img src={reactLogo} className="logo" alt="React logo" />
-        </a>
+          <img src={pokeBallLogo} className="logo" alt="React logo" />
       </div>
       <div className="card">
         <button onClick={()=> navigate("/playground")}>
