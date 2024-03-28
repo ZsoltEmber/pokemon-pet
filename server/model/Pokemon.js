@@ -11,7 +11,8 @@ const pokemonSchema = new Schema({
     defense: Number,
     speed: Number,
     xp: Number,
+    types: Array,
 
-})
+}, {collection: "Pokemon"})
 
 module.exports = model("Pokemon", pokemonSchema)

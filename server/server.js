@@ -35,3 +35,30 @@ app.get('/api/pokemon/:id', async (req, res) =>{
 
     res.json(pokemon)
 })
+
+app.post('/api/pokemon/catch',async (req, res)=>{
+
+    const name = req.body.name;
+    const nickName = "";
+    const front = req.body.front;
+    const back = req.body.back;
+    const hp = req.body.hp;
+    const attack = req.body.attack;
+    const defense = req.body.defense;
+    const xp = req.body.xp;
+    const types = req.body.types
+
+    const newPoke = new Pokemon({
+        name,
+        nickName,
+        front,
+        back,
+        hp,
+        attack,
+        defense,
+        xp,
+        types,
+    });
+    await newPoke.save()
+    res.status(200).json(newPoke)
+})

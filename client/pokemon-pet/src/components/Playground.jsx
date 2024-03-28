@@ -10,7 +10,9 @@ function Playground(){
             setPokemon(response)
         }
         fetchPokemon()
-    }, [pokemon]);
+    }, []);
+
+
 
 
     return(
