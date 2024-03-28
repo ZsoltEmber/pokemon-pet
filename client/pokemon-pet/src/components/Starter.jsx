@@ -1,7 +1,9 @@
+import {useNavigate} from "react-router-dom";
 
 function Starter({pokemon}) {
     const sprite = pokemon.sprites["versions"]["generation-v"]["black-white"].animated.front_default
     const name = pokemon.name
+    const navigate = useNavigate();
 
     const starter = {
         name: name,
@@ -30,7 +32,10 @@ function Starter({pokemon}) {
 
 
     return (
-        <div onClick={()=> catchPokemon()} className={"starter-container"}>
+        <div onClick={()=> {
+            catchPokemon()
+            navigate("/playground")
+        }} className={"starter-container"}>
             <p>{name.toUpperCase()}</p>
             <img
                 className={"starter-img"}

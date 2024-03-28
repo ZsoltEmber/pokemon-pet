@@ -1,28 +1,32 @@
-import ChooseStarter from "./ChooseStarter";
-import {useEffect, useState} from "react";
 
-function Playground(){
-    const [pokemon, setPokemon]= useState();
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import Loading from "./Loading.jsx";
+import Pokemon from "./Pokemon.jsx";
+
+function Playground() {
+    const [pokemon, setPokemon] = useState([]);
+    const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchPokemon = async ()=>{
+        const fetchPokemon = async () => {
             const response = await fetch("/api/pokemon");
-            setPokemon(response)
+            const data = await response.json();
+            setPokemon(data)
         }
         fetchPokemon()
+        console.log(pokemon)
     }, []);
 
 
-
-
-    return(
-        pokemon?
-        <div>
-            <ChooseStarter/>
-        </div> :
+    return (
+        pokemon.length > 0 ?
             <div>
-                <h1>playground</h1>
-            </div>
+                {pokemon ? <div>
+                        {pokemon.map(poke =><Pokemon key={poke._id} pokemon={poke} />)}
+                </div> : <Loading/>}
+            </div> :
+            navigate("/chooseStarter")
     );
 }
 

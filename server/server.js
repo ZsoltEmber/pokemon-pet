@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const Pokemon = require("./model/Pokemon")
+const Pokemon = require("./model/Pokemon.js")
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -26,6 +26,7 @@ mongoose.connect(MONGO_URL)
 
 app.get("/api/pokemon", async(req, res) => {
     const AllPokemon = await Pokemon.find({})
+    console.log(AllPokemon)
     res.send(AllPokemon)
     res.status(200)
 })
