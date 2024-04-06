@@ -29,14 +29,6 @@
   animation: logo-spin infinite 5s linear;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 .starter-img{
   image-rendering: pixelated;
   height: 100px;
@@ -61,3 +53,4 @@
 .title{
   margin-bottom: 100px;
 }
+

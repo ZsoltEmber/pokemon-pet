@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const Pokemon = require("./model/Pokemon")
+const Pokemon = require("./model/Pokemon.js")
 
 const { MONGO_URL, PORT = 8080 } = process.env;
 
@@ -26,6 +26,7 @@ mongoose.connect(MONGO_URL)
 
 app.get("/api/pokemon", async(req, res) => {
     const AllPokemon = await Pokemon.find({})
+    console.log(AllPokemon)
     res.send(AllPokemon)
     res.status(200)
 })
@@ -34,4 +35,31 @@ app.get('/api/pokemon/:id', async (req, res) =>{
     const pokemon = await Pokemon.findById(req.params.id);
 
     res.json(pokemon)
+})
+
+app.post('/api/pokemon/catch',async (req, res)=>{
+
+    const name = req.body.name;
+    const nickName = "";
+    const front = req.body.front;
+    const back = req.body.back;
+    const hp = req.body.hp;
+    const attack = req.body.attack;
+    const defense = req.body.defense;
+    const xp = req.body.xp;
+    const types = req.body.types
+
+    const newPoke = new Pokemon({
+        name,
+        nickName,
+        front,
+        back,
+        hp,
+        attack,
+        defense,
+        xp,
+        types,
+    });
+    await newPoke.save()
+    res.status(200).json(newPoke)
 })
