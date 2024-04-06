@@ -1,5 +1,4 @@
 import {useNavigate} from "react-router-dom";
-
 function Starter({pokemon}) {
     const sprite = pokemon.sprites["versions"]["generation-v"]["black-white"].animated.front_default
     const name = pokemon.name

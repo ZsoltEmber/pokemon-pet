@@ -1,32 +1,45 @@
 
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import Loading from "./Loading.jsx";
 import Pokemon from "./Pokemon.jsx";
+import "./Playground.css"
 
 function Playground() {
     const [pokemon, setPokemon] = useState([]);
     const navigate = useNavigate()
 
     useEffect(() => {
+        document.body.classList.add("playground-body");
         const fetchPokemon = async () => {
             const response = await fetch("/api/pokemon");
             const data = await response.json();
             setPokemon(data)
         }
         fetchPokemon()
-        console.log(pokemon)
+        return () => {
+            document.body.classList.remove("playground-body");
+        };
     }, []);
 
 
     return (
-        pokemon.length > 0 ?
-            <div>
-                {pokemon ? <div>
-                        {pokemon.map(poke =><Pokemon key={poke._id} pokemon={poke} />)}
-                </div> : <Loading/>}
-            </div> :
-            navigate("/chooseStarter")
+        <div className="playground-root">
+            <div className="playground-container">
+            {pokemon.length > 0 ? (
+                <div className="playground-content">
+                    {pokemon.map((poke) => (
+                        <Pokemon key={poke._id} pokemon={poke} />
+                    ))}
+                </div>
+            ) : (
+                navigate("/chooseStarter")
+            )}
+        </div>
+                    <button
+                        className={"fight-button"}
+                        onClick={() => navigate("/fight")}
+                    >Fight</button>
+        </div>
     );
 }
 

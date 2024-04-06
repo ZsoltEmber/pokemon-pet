@@ -7,17 +7,17 @@ function App() {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div>
       <div>
       <h1>Poké Ranch</h1>
           <img src={pokeBallLogo} className="logo" alt="React logo" />
       </div>
-      <div className="card">
+      <div>
         <button onClick={()=> navigate("/playground")}>
           Let's start
         </button>
       </div>
-    </>
+    </div>
   )
 }
 
