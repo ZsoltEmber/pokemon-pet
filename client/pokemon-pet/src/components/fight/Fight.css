@@ -1,0 +1,9 @@
+.fight-body {
+    background: url("../pics/fight.jpg");
+    background-size: cover;
+    background-attachment: inherit;
+    background-position: inherit;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}

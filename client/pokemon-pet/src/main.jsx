@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Playground from './components/Playground.jsx';
+import Playground from './components/playground/Playground.jsx';
 import ChooseStarter from "./components/ChooseStarter.jsx";
+import Fight from "./components/fight/Fight.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/chooseStarter",
     element: <ChooseStarter />
+  },
+  {
+    path: "/fight",
+    element: <Fight />
   },
 ]);
 
