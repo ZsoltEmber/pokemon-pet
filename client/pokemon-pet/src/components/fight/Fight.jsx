@@ -1,11 +1,14 @@
 import {useEffect, useState} from "react";
 import "./Fight.css"
 import Foe from "./Foe.jsx";
+import Fighter from "./Fighter.jsx";
+import ChooseFighter from "./ChooseFighter.jsx";
+import Stats from "./Stats.jsx";
 
-function Fight(){
+function Fight() {
 
-    const [fighter, setFighter] = useState()
-    const [foe, setFoe] = useState()
+    const [fighter, setFighter] = useState(null)
+    const [foe, setFoe] = useState(null)
 
     function getRandomInt(min, max) {
         const minRounded = Math.ceil(min);
@@ -29,10 +32,13 @@ function Fight(){
     }, []);
 
 
-    return(
+    return (
         <div className={"fight-root"}>
             {foe && (<div className={"foe"}><Foe pokemon={foe}/></div>)}
-
+            {foe && <div className={"foe-stats"}> <Stats pokemon={foe}/> </div>}
+            {fighter ? (<div className={"fighter"}><Fighter pokemon={fighter}/></div>) : (
+                <ChooseFighter onSelect={setFighter}/>)}
+            {fighter && <div className={"fighter-stats"}> <Stats pokemon={fighter}/> </div>}
         </div>
     )
 }
