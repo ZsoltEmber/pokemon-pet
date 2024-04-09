@@ -21,3 +21,23 @@
     width: 200px;
     height: 200px;
 }
+
+.fighter-selector{
+    background-color: rgba(26,26,26, 0.5);
+    width: 10vw;
+    height: 90vh;
+    overflow-y: scroll;
+    border-radius: 5px;
+
+}
+
+.fighter{
+    position: absolute;
+    bottom: 150px;
+    left: 500px;
+}
+
+.pokemon-nickname{
+    background-color: rgba(26,26,26, 0.5);
+    border-radius: 5px;
+}

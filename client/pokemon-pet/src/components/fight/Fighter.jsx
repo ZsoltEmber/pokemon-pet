@@ -3,12 +3,12 @@ function Fighter({pokemon}){
 
     const fighter = {
         name: pokemon.name,
-        front: pokemon.sprites.versions['generation-v']['black-white'].animated.front_default,
-        back: pokemon.sprites.versions['generation-v']['black-white'].animated.back_default,
-        hp: pokemon.stats[0].base_stat,
-        attack: pokemon.stats[1].base_stat,
-        defense: pokemon.stats[2].base_stat,
-        xp: 0,
+        front: pokemon.front,
+        back: pokemon.back,
+        hp: pokemon.hp,
+        attack: pokemon.attack,
+        defense: pokemon.defense,
+        xp: pokemon.xp,
         height: pokemon.height,
         types: pokemon.types,
     }
@@ -16,7 +16,7 @@ function Fighter({pokemon}){
 
     return (
         <div>
-            <div className="pokemonNickname">
+            <div className="pokemon-nickname">
                 {fighter.name.toUpperCase()}
             </div>
             <img className="fighter-sprite"

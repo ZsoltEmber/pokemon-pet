@@ -15,7 +15,7 @@ function Foe({pokemon}) {
 
     return (
         <div>
-            <div className="pokemonNickname">
+            <div className="pokemon-nickname">
                 {foe.name.toUpperCase()}
             </div>
             <img className="fighter-sprite"
