@@ -1,7 +1,7 @@
-function Foe({pokemon}) {
+function Fighter({pokemon}){
 
 
-    const foe = {
+    const fighter = {
         name: pokemon.name,
         front: pokemon.sprites.versions['generation-v']['black-white'].animated.front_default,
         back: pokemon.sprites.versions['generation-v']['black-white'].animated.back_default,
@@ -13,18 +13,19 @@ function Foe({pokemon}) {
         types: pokemon.types,
     }
 
+
     return (
         <div>
             <div className="pokemonNickname">
-                {foe.name.toUpperCase()}
+                {fighter.name.toUpperCase()}
             </div>
             <img className="fighter-sprite"
-                 src={foe.front}
-                 alt={foe.name}>
+                 src={fighter.back}
+                 alt={fighter.name}>
             </img>
         </div>
     )
 }
 
 
-export default Foe;
+export default Fighter;

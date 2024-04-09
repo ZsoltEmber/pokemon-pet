@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import "./Fight.css"
 import Foe from "./Foe.jsx";
+import Fighter from "./Fighter.jsx";
 
 function Fight(){
 
@@ -29,10 +30,13 @@ function Fight(){
     }, []);
 
 
+
+
+
     return(
         <div className={"fight-root"}>
             {foe && (<div className={"foe"}><Foe pokemon={foe}/></div>)}
-
+            {fighter && (<div className={"fighter"}><Fighter pokemon={fighter}/></div>)}
         </div>
     )
 }
