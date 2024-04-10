@@ -60,3 +60,23 @@
     bottom: 100px;
     left: 200px;
 }
+
+.UI-container{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    width: 20vw;
+    height: 100px;
+    bottom: 70px;
+    right: 300px;
+}
+
+.fight-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+.attack-menu{
+    display: flex;
+    flex-direction: column;
+}
