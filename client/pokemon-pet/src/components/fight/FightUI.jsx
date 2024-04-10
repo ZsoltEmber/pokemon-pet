@@ -1,6 +1,5 @@
 import {useState} from "react";
-
-function FightUI({pokemon}) {
+function FightUI({ foe, fighter}) {
     const [attack, setAttack] = useState(false);
     const [run, setRun] = useState(false)
 
@@ -30,6 +29,8 @@ function FightUI({pokemon}) {
                 <button>Yes</button>
                 <button>No</button>
             </div>}
+
+
         </div>
     )
 

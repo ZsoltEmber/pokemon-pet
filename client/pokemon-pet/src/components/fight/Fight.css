@@ -64,11 +64,13 @@
 .UI-container{
     display: flex;
     flex-direction: row;
+    place-content: start;
     position: absolute;
-    width: 20vw;
-    height: 100px;
-    bottom: 70px;
-    right: 300px;
+    width:600px;
+    height: 200px;
+    right:100px;
+    bottom: 10px;
+    overflow: hidden;
 }
 
 .fight-menu{
@@ -79,4 +81,26 @@
 .attack-menu{
     display: flex;
     flex-direction: column;
+}
+
+.logger-container{
+    background-color: rgba(26,26,26, 0.5);
+    border: solid;
+    border-color: #1a1a1a;
+    border-radius: 5px;
+    position: absolute;
+    width:350px;
+    height: 150px;
+    right: 150px;
+    bottom: 55px;
+    justify-content: flex-end;
+
+    overflow: auto;
+}
+
+.log{
+    display: flex;
+    place-content: flex-start;
+    padding: 0;
+    margin: 5px;
 }
