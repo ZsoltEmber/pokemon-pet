@@ -5,11 +5,13 @@ import Fighter from "./Fighter.jsx";
 import ChooseFighter from "./ChooseFighter.jsx";
 import Stats from "./Stats.jsx";
 import FightUI from "./FightUI.jsx";
+import Logger from "./Logger.jsx";
 
 function Fight() {
 
     const [fighter, setFighter] = useState(null)
     const [foe, setFoe] = useState(null)
+    const [logs, setLogs] = useState( [])
 
     function getRandomInt(min, max) {
         const minRounded = Math.ceil(min);
@@ -32,15 +34,21 @@ function Fight() {
         };
     }, []);
 
+    function handleSelect(fighter){
+        setFighter(fighter);
+        setLogs([`A wild ${foe.name.toUpperCase()} appeared`, `Let's go ${fighter.nickName? fighter.nickName.toUpperCase() : fighter.name.toUpperCase()}`]);
+    }
+
 
     return (
         <div className={"fight-root"}>
             {foe && (<div className={"foe"}><Foe pokemon={foe}/></div>)}
             {foe && <div className={"foe-stats"}><Stats pokemon={foe}/></div>}
             {fighter ? (<div className={"fighter"}><Fighter pokemon={fighter}/></div>) : (
-                <ChooseFighter onSelect={setFighter}/>)}
+                <ChooseFighter onSelect={handleSelect}/>)}
             {fighter && <div className={"fighter-stats"}><Stats pokemon={fighter}/></div>}
-            {fighter && <FightUI/>}
+            {fighter && <FightUI onLog={setLogs} foe={foe} fighter={fighter} />}
+            {fighter && foe && <Logger logs={...logs}></Logger>}
         </div>
     )
 }
