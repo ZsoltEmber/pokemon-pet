@@ -6,13 +6,16 @@ import ChooseFighter from "./ChooseFighter.jsx";
 import Stats from "./Stats.jsx";
 import FightUI from "./FightUI.jsx";
 import Logger from "./Logger.jsx";
+import fightRule from "./FightRule.js";
+
 function Fight() {
 
     const [fighter, setFighter] = useState(null)
     const [foe, setFoe] = useState(null)
-    const [logs, setLogs] = useState( [])
+    const [logs, setLogs] = useState([])
     const [foeHp, setFoeHp] = useState()
     const [fighterHp, setFighterHp] = useState()
+
     function getRandomInt(min, max) {
         const minRounded = Math.ceil(min);
         const maxRounded = Math.floor(max);
@@ -35,33 +38,71 @@ function Fight() {
         };
     }, []);
 
-    function handleSelect(fighter){
+    function handleSelect(fighter) {
         setFighter(fighter);
-        setLogs([`A wild ${foe.name.toUpperCase()} appeared`, `Let's go ${fighter.nickName? fighter.nickName.toUpperCase() : fighter.name.toUpperCase()}`]);
+        setLogs([`A wild ${foe.name.toUpperCase()} appeared`, `Let's go ${fighter.nickName ? fighter.nickName.toUpperCase() : fighter.name.toUpperCase()}`]);
     }
 
-    function handleAgileAttack(fighter, foe){
+    function extractTypes(pokemon) {
+        const types = [];
+        for (const type of pokemon.types) {
+            types.push(type.type.name)
+        }
+        return types;
+    }
+
+    function isStrongAgainst(fighter, foe) {
+        const fighterTypes = extractTypes(fighter)
+        let strongAgainst = [];
+        const foeTypes = extractTypes(foe)
+        for (let i = 0; i < fighterTypes.length; i++) {
+            strongAgainst = (fightRule[fighterTypes[i]].strong)
+        }
+        for (const foeType of foeTypes) {
+            if (strongAgainst.includes(foeType)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function handleAgileAttack(fighter, foe) {
         const random = getRandomInt(217, 256);
         const foeDefense = foe.stats[2]["base_stat"];
-        const agileAttackDamage= (((((2/5+2)*fighter.attack*100/foeDefense)/50)+2)*random/255)*1.5
-        setLogs(prevState => [...prevState, `${fighter.name.toUpperCase()} used Agile Attack`])
+        const fighterName = fighter.nickName ? fighter.nickName : fighter.name.toUpperCase();
+        const isSuperEffective = isStrongAgainst(fighter, foe)
+
+        let agileAttackDamage = (((((2 / 5 + 2) * fighter.attack * 100 / foeDefense) / 50) + 2) * random / 255) * 1.5
+        setLogs(prevState => [...prevState, `${fighterName} used Agile Attack`])
+        if (isSuperEffective) {
+            agileAttackDamage *= 2;
+            setLogs(prevState => [...prevState, `It is SUPER EFFECTIVE`])
+        }
         setFoeHp(prevState => prevState - agileAttackDamage)
-        
+
     }
 
-    function handleStrongAttack(fighter, foe){
+    function handleStrongAttack(fighter, foe) {
         const random = getRandomInt(217, 256);
         const chance = getRandomInt(0, 4);
-        const fighterName= fighter.nickName? fighter.nickName : fighter.name.toUpperCase();
-        console.log(chance)
+        const fighterName = fighter.nickName ? fighter.nickName : fighter.name.toUpperCase();
+        const isSuperEffective = isStrongAgainst(fighter, foe)
 
-        if(chance !== 0) {
+        if (chance !== 0) {
             const foeDefense = foe.stats[2]["base_stat"];
-            const agileAttackDamage = (((((2 / 5 + 2) * fighter.attack * 100 / foeDefense) / 50) + 2) * random / 255) * 2.0
-            setLogs(prevState => [...prevState, `${fighter.name.toUpperCase()} used Strong Attack`])
-            setFoeHp(prevState => prevState - agileAttackDamage)
-        }
-        else{
+            let StrongAttackDamage = (((((2 / 5 + 2) * fighter.attack * 100 / foeDefense) / 50) + 2) * random / 255) * 2.0
+
+
+            setLogs(prevState => [...prevState, `${fighterName} used Strong Attack`])
+
+            if (isSuperEffective) {
+                StrongAttackDamage *= 2;
+                setLogs(prevState => [...prevState, `It is SUPER EFFECTIVE`])
+            }
+
+            setFoeHp(prevState => prevState - StrongAttackDamage)
+
+        } else {
             setLogs(prevState => [...prevState, `${fighterName} used Strong Attack`])
             setLogs(prevState => [...prevState, `${fighterName} but it failed...`])
         }
