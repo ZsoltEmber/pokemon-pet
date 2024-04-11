@@ -1,5 +1,5 @@
 import {useState} from "react";
-function FightUI({ foe, fighter}) {
+function FightUI({onAgileAttack, onStrongAttack, fighter, foe}) {
     const [attack, setAttack] = useState(false);
     const [run, setRun] = useState(false)
 
@@ -21,16 +21,17 @@ function FightUI({ foe, fighter}) {
             </div>
 
             {attack && <div className={"attack-menu"}>
-                <button>Agile</button>
-                <button>Strong</button>
+                <button
+                    onClick={()=> onAgileAttack(fighter, foe)}
+                >Agile</button>
+                <button
+                onClick={()=> onStrongAttack(fighter, foe)}>Strong</button>
             </div>}
 
             {run && <div className={"attack-menu"}>
                 <button>Yes</button>
                 <button>No</button>
             </div>}
-
-
         </div>
     )
 

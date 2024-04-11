@@ -93,9 +93,9 @@
     height: 150px;
     right: 150px;
     bottom: 55px;
-    justify-content: flex-end;
-
-    overflow: auto;
+    flex-direction: column-reverse;
+    overflow-y: auto;
+    scroll-behavior: smooth;
 }
 
 .log{
