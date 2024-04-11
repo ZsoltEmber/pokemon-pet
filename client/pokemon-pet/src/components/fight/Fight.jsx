@@ -78,7 +78,7 @@ function Fight() {
             agileAttackDamage *= 2;
             setLogs(prevState => [...prevState, `It is SUPER EFFECTIVE`])
         }
-        setFoeHp(prevState => prevState - agileAttackDamage)
+        setFoeHp(prevState => prevState - Math.floor(agileAttackDamage))
 
     }
 
@@ -100,7 +100,7 @@ function Fight() {
                 setLogs(prevState => [...prevState, `It is SUPER EFFECTIVE`])
             }
 
-            setFoeHp(prevState => prevState - StrongAttackDamage)
+            setFoeHp(prevState => prevState - Math.floor(StrongAttackDamage))
 
         } else {
             setLogs(prevState => [...prevState, `${fighterName} used Strong Attack`])
@@ -112,16 +112,27 @@ function Fight() {
     return (
         <div className={"fight-root"}>
             {foe && (<div className={"foe"}><Foe pokemon={foe}/></div>)}
-            {foe && <div className={"foe-stats"}><Stats pokemon={foe}/></div>}
+            {foe && <div className={"foe-stats"}>
+                <Stats
+                    pokemon={foe}
+                    hp={foeHp}/>
+            </div>}
             {fighter ? (<div className={"fighter"}><Fighter pokemon={fighter}/></div>) : (
                 <ChooseFighter onSelect={handleSelect}/>)}
-            {fighter && <div className={"fighter-stats"}><Stats pokemon={fighter}/></div>}
+            {fighter && <div
+                className={"fighter-stats"}>
+                <Stats
+                    pokemon={fighter}
+                    hp={fighterHp}/>
+            </div>}
             {fighter && <FightUI
                 onLog={setLogs}
                 onAgileAttack={handleAgileAttack}
                 onStrongAttack={handleStrongAttack}
                 fighter={fighter}
-                foe={foe}/>}
+                foe={foe}
+
+            />}
             {fighter && foe && <Logger logs={...logs}></Logger>}
         </div>
     )

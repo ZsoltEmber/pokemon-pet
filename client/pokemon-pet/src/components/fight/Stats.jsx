@@ -1,4 +1,4 @@
-function Stats({pokemon}) {
+function Stats({pokemon, hp}) {
     const typesData = [pokemon.types]
     let types = [];
     pokemon.types.map(type => (types.push(type.type.name)));
@@ -6,7 +6,7 @@ function Stats({pokemon}) {
     return (
             <div className={"stats-container"}>
                 <div> {pokemon.name.toUpperCase()}</div>
-                <div className={"hp"}>hp: {pokemon.hasOwnProperty("stats")? pokemon.stats[0].base_stat : pokemon.hp}</div>
+                <div className={"hp"}>hp: {hp}</div>
                 <div className={"type"}>
                     type: {types.join(", ")}
                 </div>
