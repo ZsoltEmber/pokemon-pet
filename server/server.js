@@ -26,7 +26,6 @@ mongoose.connect(MONGO_URL)
 
 app.get("/api/pokemon", async(req, res) => {
     const AllPokemon = await Pokemon.find({})
-    console.log(AllPokemon)
     res.send(AllPokemon)
     res.status(200)
 })
@@ -38,7 +37,6 @@ app.get('/api/pokemon/:id', async (req, res) =>{
 })
 
 app.post('/api/pokemon/catch',async (req, res)=>{
-
     const name = req.body.name;
     const nickName = "";
     const front = req.body.front;

@@ -7,10 +7,10 @@ import Stats from "./Stats.jsx";
 import FightUI from "./FightUI.jsx";
 import Logger from "./Logger.jsx";
 import fightRule from "./FightRule.js";
+import FoeFainted from "../finish/FoeFainted.jsx";
 
 
 function Fight() {
-
     const [fighter, setFighter] = useState(null)
     const [foe, setFoe] = useState(null)
     const [logs, setLogs] = useState([])
@@ -32,6 +32,7 @@ function Fight() {
             document.body.classList.remove("fight-body");
         };
     }, []);
+
     function getRandomInt(min, max) {
         //The maximum is exclusive and the minimum is inclusive
         const minRounded = Math.ceil(min);
@@ -120,7 +121,7 @@ function Fight() {
         setFoeHp(prevState => prevState - Math.floor(agileAttackDamage))
 
         setTimeout(() => {
-        foeTurn(fighter, foe)
+            foeTurn(fighter, foe)
         }, "1000");
     }
 
@@ -152,33 +153,43 @@ function Fight() {
         }, "1000");
     }
 
-
     return (
         <div className={"fight-root"}>
-            {foe && (<div className={"foe"}><Foe pokemon={foe}/></div>)}
-            {foe && <div className={"foe-stats"}>
-                <Stats
-                    pokemon={foe}
-                    hp={foeHp}/>
-            </div>}
-            {fighter ? (<div className={"fighter"}><Fighter pokemon={fighter}/></div>) : (
-                <ChooseFighter onSelect={handleSelect}/>)}
-            {fighter && <div
-                className={"fighter-stats"}>
-                <Stats
-                    pokemon={fighter}
-                    hp={fighterHp}/>
-            </div>}
-            {fighter && <FightUI
-                onLog={setLogs}
-                onAgileAttack={handleAgileAttack}
-                onStrongAttack={handleStrongAttack}
-                fighter={fighter}
-                foe={foe}
+            {foeHp <= 0 ? <FoeFainted pokemon={foe}/> :
+                fighterHp <= 0 ? <ChooseFighter
+                        onSelect={handleSelect}/> :
+                    <div>
+                        {foe && (<div className={"foe"}>
+                            <Foe pokemon={foe}/></div>)}
+                        {foe && <div className={"foe-stats"}>
+                            <Stats
+                                pokemon={foe}
+                                hp={foeHp}/>
+                        </div>}
+                        {fighter ? (
+                            <div className={"fighter"}>
+                                <Fighter pokemon={fighter}/>
+                            </div>) : (
+                            <ChooseFighter onSelect={handleSelect}/>)}
+                        {fighter && <div
+                            className={"fighter-stats"}>
+                            <Stats
+                                pokemon={fighter}
+                                hp={fighterHp}/>
+                        </div>}
+                        {fighter && <FightUI
+                            onLog={setLogs}
+                            onAgileAttack={handleAgileAttack}
+                            onStrongAttack={handleStrongAttack}
+                            fighter={fighter}
+                            foe={foe}
 
-            />}
-            {fighter && foe && <Logger logs={...logs}></Logger>}
+                        />}
+                        {fighter && foe && <Logger logs={...logs}></Logger>}
+                    </div>
+            }
         </div>
+
     )
 }
 
