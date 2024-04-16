@@ -10,7 +10,7 @@ function App() {
     <div>
       <div>
       <h1>Poké Ranch</h1>
-          <img src={pokeBallLogo} className="logo" alt="React logo" />
+          <img src={pokeBallLogo} className="logo" alt="pokeball logo" />
       </div>
       <div>
         <button onClick={()=> navigate("/playground")}>
