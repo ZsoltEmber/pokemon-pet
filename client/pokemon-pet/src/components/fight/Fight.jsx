@@ -6,8 +6,10 @@ import ChooseFighter from "./ChooseFighter.jsx";
 import Stats from "./Stats.jsx";
 import FightUI from "./FightUI.jsx";
 import Logger from "./Logger.jsx";
-import fightRule from "./FightRule.js";
 import FoeFainted from "../finish/FoeFainted.jsx";
+import getRandomInt from "./getRandomInt.js";
+import getDamage from "./getDamage.js";
+import isStrongAgainst from "./isStrongAgainst.js";
 
 
 function Fight() {
@@ -16,6 +18,7 @@ function Fight() {
     const [logs, setLogs] = useState([])
     const [foeHp, setFoeHp] = useState()
     const [fighterHp, setFighterHp] = useState()
+
 
     useEffect(() => {
         document.body.classList.add("fight-body");
@@ -33,45 +36,10 @@ function Fight() {
         };
     }, []);
 
-    function getRandomInt(min, max) {
-        //The maximum is exclusive and the minimum is inclusive
-        const minRounded = Math.ceil(min);
-        const maxRounded = Math.floor(max);
-        return Math.floor(Math.random() * (maxRounded - minRounded) + minRounded);
-    }
-
-    function baseFormula(fighterAttack, foeDefense) {
-        return ((((2 / 5 + 2) * fighterAttack * 100 / foeDefense) / 50) + 2) * getRandomInt(217, 256) / 255;
-    }
-
-
     function handleSelect(fighter) {
         setFighter(fighter);
         setFighterHp(fighter.hp)
         setLogs([`A wild ${foe.name.toUpperCase()} appeared`, `Let's go ${fighter.nickName ? fighter.nickName.toUpperCase() : fighter.name.toUpperCase()}`]);
-    }
-
-    function extractTypes(pokemon) {
-        const types = [];
-        for (const type of pokemon.types) {
-            types.push(type.type.name)
-        }
-        return types;
-    }
-
-    function isStrongAgainst(attacker, defender) {
-        const fighterTypes = extractTypes(attacker)
-        let strongAgainst = [];
-        const foeTypes = extractTypes(defender)
-        for (let i = 0; i < fighterTypes.length; i++) {
-            strongAgainst = (fightRule[fighterTypes[i]].strong)
-        }
-        for (const foeType of foeTypes) {
-            if (strongAgainst.includes(foeType)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     function foeTurn(fighter, foe) {
@@ -80,9 +48,8 @@ function Fight() {
         const foeAttack = foe.stats[1]["base_stat"];
         const fighterDefense = fighter.defense;
         const isSuperEffective = isStrongAgainst(foe, fighter);
-        let strongAttackDamage = baseFormula(foeAttack, fighterDefense) * 2;
-        let agileAttackDamage = baseFormula(foeAttack, fighterDefense) * 1.5;
-
+        let strongAttackDamage = getDamage(foeAttack, fighterDefense) * 2;
+        let agileAttackDamage = getDamage(foeAttack, fighterDefense) * 1.5;
 
         if (chance === 0) {
             setLogs(prevState => [...prevState, `${foeName} used Agile Attack`])
@@ -98,13 +65,11 @@ function Fight() {
                 setLogs(prevState => [...prevState, `it is SUPER EFFECTIVE!`])
             }
             setFighterHp(prevState => prevState - Math.floor(strongAttackDamage))
-
         } else if (chance === 2) {
             setLogs(prevState => [...prevState, `${foeName} used Strong Attack`, `...but it failed`])
         } else {
             setLogs(prevState => [...prevState, `${foeName}'s attack missed`])
         }
-
     }
 
     function handleAgileAttack(fighter, foe) {
@@ -112,7 +77,7 @@ function Fight() {
         const fighterName = fighter.nickName ? fighter.nickName : fighter.name.toUpperCase();
         const isSuperEffective = isStrongAgainst(fighter, foe)
 
-        let agileAttackDamage = baseFormula(fighter.attack, foeDefense) * 1.5
+        let agileAttackDamage = getDamage(fighter.attack, foeDefense) * 1.5
         setLogs(prevState => [...prevState, `${fighterName} used Agile Attack`])
         if (isSuperEffective) {
             agileAttackDamage *= 2;
@@ -132,9 +97,7 @@ function Fight() {
 
         if (chance !== 0) {
             const foeDefense = foe.stats[2]["base_stat"];
-            let StrongAttackDamage = baseFormula(fighter.attack, foeDefense) * 2.0
-
-
+            let StrongAttackDamage = getDamage(fighter.attack, foeDefense) * 2.0
             setLogs(prevState => [...prevState, `${fighterName} used Strong Attack`])
 
             if (isSuperEffective) {
@@ -155,37 +118,46 @@ function Fight() {
 
     return (
         <div className={"fight-root"}>
+            {!fighter && <ChooseFighter onSelect={handleSelect}/>}
             {foeHp <= 0 ? <FoeFainted pokemon={foe}/> :
                 fighterHp <= 0 ? <ChooseFighter
                         onSelect={handleSelect}/> :
-                    <div>
-                        {foe && (<div className={"foe"}>
-                            <Foe pokemon={foe}/></div>)}
-                        {foe && <div className={"foe-stats"}>
-                            <Stats
-                                pokemon={foe}
-                                hp={foeHp}/>
-                        </div>}
-                        {fighter ? (
-                            <div className={"fighter"}>
-                                <Fighter pokemon={fighter}/>
-                            </div>) : (
-                            <ChooseFighter onSelect={handleSelect}/>)}
-                        {fighter && <div
-                            className={"fighter-stats"}>
-                            <Stats
-                                pokemon={fighter}
-                                hp={fighterHp}/>
-                        </div>}
-                        {fighter && <FightUI
-                            onLog={setLogs}
-                            onAgileAttack={handleAgileAttack}
-                            onStrongAttack={handleStrongAttack}
-                            fighter={fighter}
-                            foe={foe}
+                    <div className={"fight-container"}>
+                        <div className={"foe-container"}>
+                            {foe && (<div className={"foe"}>
+                                <Foe pokemon={foe}/></div>)}
+                            {foe && <div className={"foe-stats"}>
+                                <Stats
+                                    pokemon={foe}
+                                    hp={foeHp}/>
+                            </div>}
+                        </div>
 
-                        />}
-                        {fighter && foe && <Logger logs={...logs}></Logger>}
+
+                        <div className={"fighter-side-container"}>
+                            <div className={"fighter-container"}>
+                                {fighter && <div
+                                    className={"fighter-stats"}>
+                                    <Stats
+                                        pokemon={fighter}
+                                        hp={fighterHp}/>
+                                </div>}
+                                {fighter && (
+                                    <div className={"fighter"}>
+                                        <Fighter pokemon={fighter}/>
+                                    </div>)}
+                            </div>
+                            <div className={"fight-UI-container"}>
+                                {fighter && <FightUI
+                                    onLog={setLogs}
+                                    onAgileAttack={handleAgileAttack}
+                                    onStrongAttack={handleStrongAttack}
+                                    fighter={fighter}
+                                    foe={foe}
+                                />}
+                                {fighter && foe && <Logger logs={...logs}></Logger>}
+                            </div>
+                        </div>
                     </div>
             }
         </div>

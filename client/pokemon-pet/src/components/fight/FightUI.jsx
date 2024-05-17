@@ -7,12 +7,14 @@ function FightUI({onAgileAttack, onStrongAttack, fighter, foe}) {
     return (
         <div className={"UI-container"}>
             <div className={"fight-menu"}>
-                <button onClick={() => {
+                <button
+                    className={"attack-button"} onClick={() => {
                     setAttack(true)
                     setRun(false);
                 }}>Attack
                 </button>
                 <button
+                    className={"attack-button"}
                     onClick={() => {
                         setAttack(false)
                         setRun(true);
@@ -22,15 +24,20 @@ function FightUI({onAgileAttack, onStrongAttack, fighter, foe}) {
 
             {attack && <div className={"attack-menu"}>
                 <button
+                    className={"attack-button agile-button"}
                     onClick={()=> onAgileAttack(fighter, foe)}
-                >Agile</button>
+                >Agile
+                </button>
                 <button
-                onClick={()=> onStrongAttack(fighter, foe)}>Strong</button>
+                    className={"attack-button strong-button"}
+                    onClick={()=> onStrongAttack(fighter, foe)}
+                >Strong
+                </button>
             </div>}
 
             {run && <div className={"attack-menu"}>
-                <button>Yes</button>
-                <button>No</button>
+                <button className={"attack-button"}>Yes</button>
+                <button className={"attack-button"}>No</button>
             </div>}
         </div>
     )
