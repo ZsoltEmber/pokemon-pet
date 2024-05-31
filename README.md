@@ -4,6 +4,16 @@
 
 Pokemon-pet is a small game where you can be a part of an extremly exciting battles and catch new friends.
 
+The primary objectives of the project:
+1. Fight with other pokemon:
+- Lore friendly, type based combat system.
+- Catch fainted foe
+
+2. Play with captured pokemon
+- Inspect details and add nickname to pokemon
+- Pet pokemon
+
+
 ## Built With
 * [![React][React.js]][React-url]
 * [![Node.js][Node.js]][Node.js-url]
@@ -41,6 +51,8 @@ Pokemon-pet is a small game where you can be a part of an extremly exciting batt
 - [x] Design the database schema for storing pokemon information.
 - [x] Implement fight logic and interface.
 - [ ] Implement movement animation. 
+- [ ] Develop pokemon details editor interface.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
