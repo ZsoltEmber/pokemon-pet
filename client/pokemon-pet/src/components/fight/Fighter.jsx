@@ -16,9 +16,6 @@ function Fighter({pokemon}){
 
     return (
         <div>
-            <div className="pokemon-nickname">
-                {fighter.name.toUpperCase()}
-            </div>
             <img className="fighter-sprite"
                  src={fighter.back}
                  alt={fighter.name}>
