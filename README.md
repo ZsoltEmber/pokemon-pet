@@ -40,6 +40,52 @@ The primary objectives of the project:
 - open your browser and paste http://localhost:5173/
 - play
 
+## How To Play
+- Choose Your Starter
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/6d46fc27-8589-4fb6-b6e3-f82291a253ad"/>
+</div>
+
+- Your Starter Will Appear On The Playground
+<div style="text-align: center;">
+<img  width="400px"src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/f6dcb3e4-b992-418c-ba81-1b42ac161612">
+</div>
+
+
+- Lets Fight
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/5ea9b3b9-dc8b-4b5e-9ffb-202502492c09">
+</div>
+
+- Choose Your Fighter
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/70b9f0ad-c741-4da7-a47e-a23dce477217">
+</div>
+
+
+- A Wild Foe Will Apperar
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/1283fe4c-611d-4195-9644-8b3dc75b27f2">
+</div>
+
+- Use The Action Buttons To Defeat Your Foe
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/93c27f01-1ee7-4861-a247-f4921a5276ba">
+</div>
+
+- When The Foe Is Fainted You Can Cath It!
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/898afa20-1cdf-4833-9d24-64831a1ba2bd">
+</div>
+
+- MINCCINO Will Be Appear On The Playground And You Can Choose It As Your Fighter Now!
+<div style="text-align: center;">
+<img width="400px" src="https://github.com/ZsoltEmber/pokemon-pet/assets/132936073/de364e77-64b6-43bc-b5a2-915efbf4d6aa">
+</div>
+
+- Repeat 
+
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
